@@ -6,6 +6,8 @@ control the govee H6001 can be found at https://github.com/axelson/govee
 
 ![screenshot](screenshot.png)
 
+![demo](demo.gif)
+
 ## Running
 
 Pre-req: after first compiling, run `./contrib/fix-perms.sh`
