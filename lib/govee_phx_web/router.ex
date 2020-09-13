@@ -17,7 +17,8 @@ defmodule GoveePhxWeb.Router do
   scope "/", GoveePhxWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", GoveeLive, :index
+    live "/page", PageLive, :index
   end
 
   # Other scopes may use custom stacks.

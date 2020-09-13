@@ -19,7 +19,7 @@ defmodule GoveePhx.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {GoveePhx.Application, []},
+      mod: {GoveePhxApplication, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -33,6 +33,7 @@ defmodule GoveePhx.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      dep(:govee, :path),
       {:phoenix, "~> 1.5.4"},
       {:phoenix_live_view, "~> 0.13.0"},
       {:floki, ">= 0.0.0", only: :test},
@@ -57,4 +58,7 @@ defmodule GoveePhx.MixProject do
       setup: ["deps.get", "cmd npm install --prefix assets"]
     ]
   end
+
+  defp dep(:govee, :github), do: {:govee, github: "axelson/govee"}
+  defp dep(:govee, :path), do: {:govee, path: "~/dev/govee"}
 end
