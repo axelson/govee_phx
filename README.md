@@ -1,6 +1,8 @@
 # GoveePhx
 
-A simple Phoenix LiveView interface to a Govee H6001 LED bulb. Built with [BlueHeron](https://github.com/smartrent/blue_heron/)
+A simple Phoenix LiveView interface to a Govee H6001 LED bulb. Built with
+[BlueHeron](https://github.com/smartrent/blue_heron/). The code to actually
+control the govee H6001 can be found at https://github.com/axelson/govee
 
 ![screenshot](screenshot.png)
 
