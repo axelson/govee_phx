@@ -16,9 +16,35 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
+import throttle from 'lodash.throttle'
+import "./jscolor.js"
+
+let Hooks = {}
+Hooks.ColorSelector = {
+  mounted() {
+    this.el.addEventListener("build", throttle(e => {
+      const ev = e.detail
+      const hex = ev.toHEXString()
+      this.pushEvent("color", {hex: hex})
+    }, 10))
+  }
+}
+Hooks.BrightnessSlider = {
+  mounted() {
+    this.el.addEventListener("input", throttle(e => {
+      const value = parseInt(e.target.value)
+      this.pushEvent("brightness", {value: value})
+    }, 10))
+  }
+}
+
+window.update = function(colorEvent) {
+  const event = new CustomEvent('build', {detail: colorEvent});
+  colorEvent.previewElement.dispatchEvent(event);
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())

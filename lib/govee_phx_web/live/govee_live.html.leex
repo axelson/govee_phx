@@ -1,4 +1,41 @@
-<h1>Govee</h1>
+<h1>Govee H6001</h1>
 
-<div phx-click="on">On</div>
-<div phx-click="off">Off</div>
+<div class="p-1">
+  <button
+    phx-click="on"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+    On
+  </button>
+  <button
+    phx-click="off"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+    Off
+  </button>
+</div>
+
+<div class="p-1">
+  <button
+    id="color-selector"
+    data-jscolor="{
+      onChange: 'update(this, \'#pr1\')',
+      onInput: 'update(this)',
+    }"
+    phx-update="ignore"
+    phx-hook="ColorSelector"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+    Select Color
+  </button>
+</div>
+
+<div class="p-1">
+  Brightness:
+  <input
+    class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-128"
+    id="brightness-slider"
+    phx-hook="BrightnessSlider"
+    type="range"
+    min="1"
+    max="255"
+    step="1"
+    value="100" />
+</div>
