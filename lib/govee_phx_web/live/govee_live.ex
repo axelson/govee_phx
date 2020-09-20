@@ -10,6 +10,7 @@ defmodule GoveePhxWeb.GoveeLive do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
+    socket = assign(socket, note: GoveePhx.StateServer.get_note())
     {:ok, socket}
   end
 
@@ -60,36 +61,57 @@ defmodule GoveePhxWeb.GoveeLive do
     {:noreply, socket}
   end
 
+  def handle_event("update", params, socket) do
+    note = params["note"]
+    socket = assign(socket, :note, note)
+    GoveePhx.StateServer.set_note(note)
+
+    {:noreply, socket}
+  end
+
+  def handle_event("note:submit", _params, socket) do
+    GoveePhx.StateServer.submit_note()
+
+    {:noreply, socket}
+  end
+
+  def handle_event("note:clear", _params, socket) do
+    socket = assign(socket, :note, nil)
+    GoveePhx.StateServer.clear_note()
+
+    {:noreply, socket}
+  end
+
   def handle_event(event, params, socket) do
     Logger.warn("Unhandled event \"#{event}\" with params: #{inspect(params)}")
     {:noreply, socket}
   end
 
   defp flash_color_3_times(color) do
-      CommonCommands.turn_on() |> run_command()
-      CommonCommands.set_color(color) |> run_command()
+    CommonCommands.turn_on() |> run_command()
+    CommonCommands.set_color(color) |> run_command()
 
-      Process.sleep(1_000)
-      CommonCommands.turn_off() |> run_command()
+    Process.sleep(1_000)
+    CommonCommands.turn_off() |> run_command()
 
-      Process.sleep(300)
+    Process.sleep(300)
 
-      CommonCommands.turn_on() |> run_command()
-      CommonCommands.set_color(color) |> run_command()
-      Process.sleep(1_000)
+    CommonCommands.turn_on() |> run_command()
+    CommonCommands.set_color(color) |> run_command()
+    Process.sleep(1_000)
 
-      CommonCommands.turn_off() |> run_command()
-      Process.sleep(300)
+    CommonCommands.turn_off() |> run_command()
+    Process.sleep(300)
 
-      CommonCommands.turn_on() |> run_command()
-      CommonCommands.set_color(color) |> run_command()
-      Process.sleep(1_000)
+    CommonCommands.turn_on() |> run_command()
+    CommonCommands.set_color(color) |> run_command()
+    Process.sleep(1_000)
 
-      CommonCommands.turn_off() |> run_command()
-      Process.sleep(300)
+    CommonCommands.turn_off() |> run_command()
+    Process.sleep(300)
 
-      CommonCommands.turn_on() |> run_command()
-      CommonCommands.set_color(color) |> run_command()
+    CommonCommands.turn_on() |> run_command()
+    CommonCommands.set_color(color) |> run_command()
   end
 
   defp run_command(command) do

@@ -1,4 +1,4 @@
-<h1>Govee H6001</h1>
+<h1>Lights</h1>
 
 <div class="p-1">
   <button
@@ -56,4 +56,33 @@
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
     Finish
   </button>
+</div>
+
+<div class="m-5">
+</div>
+
+<h1>Notes</h1>
+
+<div class="Notes">
+  <form phx-change="update" id="note-form" class="flex flex-row flex-wrap">
+    <input
+      type="text"
+      name="note"
+      class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
+      value="<%= @note %>">
+    <div class="p-1">
+      <button
+        phx-click="note:submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Submit
+      </button>
+    </div>
+    <div class="p-1">
+      <button
+        phx-click="note:clear"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Clear
+      </button>
+    </div>
+  </form>
 </div>

@@ -8,6 +8,7 @@ defmodule GoveePhxApplication do
       GoveePhxWeb.Telemetry,
       {Phoenix.PubSub, name: GoveePhx.PubSub},
       govee_ble(),
+      GoveePhx.StateServer,
       GoveePhxWeb.Endpoint
     ]
 
