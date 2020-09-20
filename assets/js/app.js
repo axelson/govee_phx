@@ -26,7 +26,7 @@ Hooks.ColorSelector = {
       const ev = e.detail
       const hex = ev.toHEXString()
       this.pushEvent("color", {hex: hex})
-    }, 10))
+    }, 100))
   }
 }
 Hooks.BrightnessSlider = {
@@ -34,7 +34,7 @@ Hooks.BrightnessSlider = {
     this.el.addEventListener("input", throttle(e => {
       const value = parseInt(e.target.value)
       this.pushEvent("brightness", {value: value})
-    }, 10))
+    }, 100))
   }
 }
 
