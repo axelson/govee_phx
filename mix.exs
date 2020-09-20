@@ -34,6 +34,8 @@ defmodule GoveePhx.MixProject do
   defp deps do
     [
       dep(:govee, :github),
+      dep(:notes, :github),
+
       {:phoenix, "~> 1.5.4"},
       {:phoenix_live_view, "~> 0.13.0"},
       {:floki, ">= 0.0.0", only: :test},
@@ -61,4 +63,7 @@ defmodule GoveePhx.MixProject do
 
   defp dep(:govee, :github), do: {:govee, github: "axelson/govee"}
   defp dep(:govee, :path), do: {:govee, path: "~/dev/govee"}
+
+  defp dep(:notes, :github), do: {:notes, github: "axelson/notes"}
+  defp dep(:notes, :path), do: {:notes, path: "~/dev/notes"}
 end

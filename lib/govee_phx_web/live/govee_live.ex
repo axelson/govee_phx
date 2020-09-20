@@ -10,7 +10,7 @@ defmodule GoveePhxWeb.GoveeLive do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    socket = assign(socket, note: GoveePhx.StateServer.get_note())
+    socket = assign(socket, note: Notes.get_note())
     {:ok, socket}
   end
 
@@ -64,20 +64,20 @@ defmodule GoveePhxWeb.GoveeLive do
   def handle_event("update", params, socket) do
     note = params["note"]
     socket = assign(socket, :note, note)
-    GoveePhx.StateServer.set_note(note)
+    Notes.set_note(note)
 
     {:noreply, socket}
   end
 
   def handle_event("note:submit", _params, socket) do
-    GoveePhx.StateServer.submit_note()
+    Notes.submit_note()
 
     {:noreply, socket}
   end
 
   def handle_event("note:clear", _params, socket) do
     socket = assign(socket, :note, nil)
-    GoveePhx.StateServer.clear_note()
+    Notes.clear_note()
 
     {:noreply, socket}
   end
