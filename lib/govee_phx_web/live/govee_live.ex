@@ -5,6 +5,9 @@ defmodule GoveePhxWeb.GoveeLive do
   alias Govee.CommonCommands
   alias Govee.BLEConnection
 
+  @meeting_in_progress_color 0xFF0000
+  @meeting_finished_color 0x0D9106
+
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     {:ok, socket}
@@ -41,9 +44,52 @@ defmodule GoveePhxWeb.GoveeLive do
     {:noreply, socket}
   end
 
+  def handle_event("meeting:start", _, socket) do
+    Task.start_link(fn ->
+      flash_color_3_times(@meeting_in_progress_color)
+    end)
+
+    {:noreply, socket}
+  end
+
+  def handle_event("meeting:finish", _, socket) do
+    Task.start_link(fn ->
+      flash_color_3_times(@meeting_finished_color)
+    end)
+
+    {:noreply, socket}
+  end
+
   def handle_event(event, params, socket) do
     Logger.warn("Unhandled event \"#{event}\" with params: #{inspect(params)}")
     {:noreply, socket}
+  end
+
+  defp flash_color_3_times(color) do
+      CommonCommands.turn_on() |> run_command()
+      CommonCommands.set_color(color) |> run_command()
+
+      Process.sleep(1_000)
+      CommonCommands.turn_off() |> run_command()
+
+      Process.sleep(300)
+
+      CommonCommands.turn_on() |> run_command()
+      CommonCommands.set_color(color) |> run_command()
+      Process.sleep(1_000)
+
+      CommonCommands.turn_off() |> run_command()
+      Process.sleep(300)
+
+      CommonCommands.turn_on() |> run_command()
+      CommonCommands.set_color(color) |> run_command()
+      Process.sleep(1_000)
+
+      CommonCommands.turn_off() |> run_command()
+      Process.sleep(300)
+
+      CommonCommands.turn_on() |> run_command()
+      CommonCommands.set_color(color) |> run_command()
   end
 
   defp run_command(command) do
