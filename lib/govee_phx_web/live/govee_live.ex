@@ -7,7 +7,6 @@ defmodule GoveePhxWeb.GoveeLive do
 
   @meeting_in_progress_color 0xFF0000
   @meeting_finished_color 0x0D9106
-  @note_color 0x45FFF3
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -72,8 +71,6 @@ defmodule GoveePhxWeb.GoveeLive do
 
   def handle_event("note:submit", _params, socket) do
     Notes.submit_note()
-    CommonCommands.turn_on() |> run_command()
-    CommonCommands.set_color(@note_color) |> run_command()
 
     {:noreply, socket}
   end
@@ -81,8 +78,6 @@ defmodule GoveePhxWeb.GoveeLive do
   def handle_event("note:clear", _params, socket) do
     socket = assign(socket, :note, nil)
     Notes.clear_note()
-    # Problem, this should be a side-effect of Notes.clear_note() so I can do this from launcher as well...
-    CommonCommands.turn_off() |> run_command()
 
     {:noreply, socket}
   end
