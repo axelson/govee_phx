@@ -72,6 +72,7 @@ defmodule GoveePhxWeb.GoveeLive do
 
   def handle_event("note:submit", _params, socket) do
     Notes.submit_note()
+    CommonCommands.turn_on() |> run_command()
     CommonCommands.set_color(@note_color) |> run_command()
 
     {:noreply, socket}
