@@ -81,6 +81,8 @@ defmodule GoveePhxWeb.GoveeLive do
   def handle_event("note:clear", _params, socket) do
     socket = assign(socket, :note, nil)
     Notes.clear_note()
+    # Problem, this should be a side-effect of Notes.clear_note() so I can do this from launcher as well...
+    CommonCommands.turn_off() |> run_command()
 
     {:noreply, socket}
   end
