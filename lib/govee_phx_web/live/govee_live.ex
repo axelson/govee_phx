@@ -10,6 +10,10 @@ defmodule GoveePhxWeb.GoveeLive do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      :ok = Notes.subscribe()
+    end
+
     socket = assign(socket, note: Notes.get_note())
     {:ok, socket}
   end
@@ -84,6 +88,17 @@ defmodule GoveePhxWeb.GoveeLive do
 
   def handle_event(event, params, socket) do
     Logger.warn("Unhandled event \"#{event}\" with params: #{inspect(params)}")
+    {:noreply, socket}
+  end
+
+  @impl Phoenix.LiveView
+  def handle_info({:notes, :submit_note, note}, socket) do
+    socket = assign(socket, note: note)
+    {:noreply, socket}
+  end
+
+  def handle_info(event, socket) do
+    Logger.warn("Unhandled event: #{inspect event}")
     {:noreply, socket}
   end
 
