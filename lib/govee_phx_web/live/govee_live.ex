@@ -57,17 +57,13 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_event("meeting:start", _, socket) do
-    Task.start_link(fn ->
-      flash_color_3_times(@meeting_in_progress_color)
-    end)
+    Notes.start_meeting()
 
     {:noreply, socket}
   end
 
   def handle_event("meeting:finish", _, socket) do
-    Task.start_link(fn ->
-      flash_color_3_times(@meeting_finished_color)
-    end)
+    Notes.finish_meeting()
 
     {:noreply, socket}
   end
@@ -107,33 +103,6 @@ defmodule GoveePhxWeb.GoveeLive do
   def handle_info(event, socket) do
     Logger.warn("Unhandled event: #{inspect event}")
     {:noreply, socket}
-  end
-
-  defp flash_color_3_times(color) do
-    CommonCommands.turn_on() |> run_command()
-    CommonCommands.set_color(color) |> run_command()
-
-    Process.sleep(1_000)
-    CommonCommands.turn_off() |> run_command()
-
-    Process.sleep(300)
-
-    CommonCommands.turn_on() |> run_command()
-    CommonCommands.set_color(color) |> run_command()
-    Process.sleep(1_000)
-
-    CommonCommands.turn_off() |> run_command()
-    Process.sleep(300)
-
-    CommonCommands.turn_on() |> run_command()
-    CommonCommands.set_color(color) |> run_command()
-    Process.sleep(1_000)
-
-    CommonCommands.turn_off() |> run_command()
-    Process.sleep(300)
-
-    CommonCommands.turn_on() |> run_command()
-    CommonCommands.set_color(color) |> run_command()
   end
 
   def run_command(command) do
