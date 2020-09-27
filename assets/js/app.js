@@ -19,22 +19,34 @@ import {LiveSocket} from "phoenix_live_view"
 import throttle from 'lodash.throttle'
 import "./jscolor.js"
 
+let throttleMs = 100;
 let Hooks = {}
+
 Hooks.ColorSelector = {
   mounted() {
     this.el.addEventListener("build", throttle(e => {
       const ev = e.detail
       const hex = ev.toHEXString()
       this.pushEvent("color", {hex: hex})
-    }, 100))
+    }, throttleMs))
   }
 }
+
 Hooks.BrightnessSlider = {
   mounted() {
     this.el.addEventListener("input", throttle(e => {
       const value = parseInt(e.target.value)
       this.pushEvent("brightness", {value: value})
-    }, 100))
+    }, throttleMs))
+  }
+}
+
+Hooks.WhiteSlider = {
+  mounted() {
+    this.el.addEventListener("input", throttle(e => {
+      const value = parseInt(e.target.value)
+      this.pushEvent("white-slider", {value: value})
+    }, throttleMs))
   }
 }
 

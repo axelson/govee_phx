@@ -49,6 +49,13 @@ defmodule GoveePhxWeb.GoveeLive do
     {:noreply, socket}
   end
 
+  def handle_event("white-slider", %{"value" => value}, socket) do
+    value = value / 100
+    CommonCommands.set_white(value) |> run_command()
+
+    {:noreply, socket}
+  end
+
   def handle_event("meeting:start", _, socket) do
     Task.start_link(fn ->
       flash_color_3_times(@meeting_in_progress_color)
@@ -129,7 +136,7 @@ defmodule GoveePhxWeb.GoveeLive do
     CommonCommands.set_color(color) |> run_command()
   end
 
-  defp run_command(command) do
+  def run_command(command) do
     for_each_device(fn device ->
       CommonCommands.send_command(command, device.att_client)
     end)
