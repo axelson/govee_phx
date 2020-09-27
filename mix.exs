@@ -35,6 +35,7 @@ defmodule GoveePhx.MixProject do
     [
       dep(:govee, :github),
       dep(:notes, :github),
+      {:exsync, path: "~/dev/forks/exsync"},
 
       {:phoenix, "~> 1.5.4"},
       {:phoenix_live_view, "~> 0.13.0"},
