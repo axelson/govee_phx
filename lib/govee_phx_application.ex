@@ -36,7 +36,7 @@ defmodule GoveePhxApplication do
       end
 
     opts = [
-      devices: Application.fetch_env!(:govee_phx, :govee_ble_config),
+      devices: Application.fetch_env!(:govee_phx, :govee_ble_devices),
       transport_config: transport_config
     ]
 

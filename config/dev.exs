@@ -73,7 +73,7 @@ config :govee_phx,
   ]
 
 config :govee_phx,
-  govee_ble_transport_config: %{
+  transport_config: %{
     vid: 0x0A5C,
     pid: 0x21E8
   },
