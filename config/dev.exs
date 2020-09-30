@@ -76,7 +76,8 @@ config :govee_phx,
   govee_ble_transport_config: %{
     vid: 0x0A5C,
     pid: 0x21E8
-  }
+  },
+  transport_type: :usb
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

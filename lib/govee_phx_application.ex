@@ -29,6 +29,12 @@ defmodule GoveePhxApplication do
       Application.fetch_env!(:govee_phx, :transport_config)
       |> Map.put(:init_commands, [%WriteLocalName{name: "Govee Controller"}])
 
+    transport_config =
+      case Application.fetch_env!(:govee_phx, :transport_type) do
+        :uart -> struct(BlueHeronTransportUART, transport_config)
+        :usb -> struct(BlueHeronTransportUSB, transport_config)
+      end
+
     opts = [
       devices: Application.fetch_env!(:govee_phx, :govee_ble_config),
       transport_config: transport_config
