@@ -37,6 +37,9 @@ defmodule GoveePhx.MixProject do
       dep(:govee_semaphore, :github),
       {:exsync, path: "~/dev/forks/exsync"},
 
+      dep(:blue_heron, :github),
+      dep(:blue_heron_transport_usb, :github),
+
       {:phoenix, "~> 1.5.4"},
       {:phoenix_live_view, "~> 0.13.0"},
       {:floki, ">= 0.0.0", only: :test},
@@ -67,4 +70,22 @@ defmodule GoveePhx.MixProject do
 
   defp dep(:govee_semaphore, :github), do: {:govee_semaphore, github: "axelson/govee_semaphore"}
   defp dep(:govee_semaphore, :path), do: {:govee_semaphore, path: "~/dev/govee_semaphore"}
+
+  defp dep(:blue_heron, :hex), do: {:blue_heron, ">= 0.0.0"}
+
+  defp dep(:blue_heron, :github),
+    do: {:blue_heron, github: "smartrent/blue_heron", branch: "main", sparse: "blue_heron", override: true}
+
+  defp dep(:blue_heron, :path),
+    do: {:blue_heron, path: "~/dev/forks/blue_heron/blue_heron", override: true}
+
+  defp dep(:blue_heron_transport_usb, :hex), do: {:blue_heron_transport_usb, ">= 0.0.0", only: :dev}
+
+  defp dep(:blue_heron_transport_usb, :github),
+    do:
+      {:blue_heron_transport_usb,
+       github: "smartrent/blue_heron", branch: "main", sparse: "blue_heron_transport_usb", only: :dev, override: true}
+
+  defp dep(:blue_heron_transport_usb, :path),
+    do: {:blue_heron_transport_usb, path: "~/dev/forks/blue_heron/blue_heron_transport_usb", only: :dev, override: true}
 end

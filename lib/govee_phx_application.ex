@@ -25,29 +25,15 @@ defmodule GoveePhxApplication do
   def govee_ble do
     alias BlueHeron.HCI.Command.ControllerAndBaseband.WriteLocalName
 
+    transport_config =
+      Application.fetch_env!(:govee_phx, :transport_config)
+      |> Map.put(:init_commands, [%WriteLocalName{name: "Govee Controller"}])
+
     opts = [
-      devices: [
-        [
-          type: :h6001,
-          addr: 0xA4C138EC49BD
-        ],
-        [
-          type: :h6001,
-          addr: 0xA4C1385184DA,
-        ],
-        [
-          type: :h6159,
-          addr: 0xA4C138668E6F
-        ]
-      ],
-      transport_config: %BlueHeronTransportUSB{
-        vid: 0x0A5C,
-        pid: 0x21E8,
-        init_commands: [%WriteLocalName{name: "Govee Controller"}]
-      }
+      devices: Application.fetch_env!(:govee_phx, :govee_ble_config),
+      transport_config: transport_config
     ]
 
-    # Govee.BLEConnection.start_link(opts, name: Server)
     {Govee.BLEConnection, opts}
   end
 end
