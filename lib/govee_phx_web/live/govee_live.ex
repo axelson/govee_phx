@@ -11,10 +11,10 @@ defmodule GoveePhxWeb.GoveeLive do
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     if connected?(socket) do
-      :ok = Notes.subscribe()
+      :ok = GoveeSemaphore.subscribe()
     end
 
-    socket = assign(socket, note: Notes.get_note())
+    socket = assign(socket, note: GoveeSemaphore.get_note())
     {:ok, socket}
   end
 
@@ -57,13 +57,13 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_event("meeting:start", _, socket) do
-    Notes.start_meeting()
+    GoveeSemaphore.start_meeting()
 
     {:noreply, socket}
   end
 
   def handle_event("meeting:finish", _, socket) do
-    Notes.finish_meeting()
+    GoveeSemaphore.finish_meeting()
 
     {:noreply, socket}
   end
@@ -71,20 +71,20 @@ defmodule GoveePhxWeb.GoveeLive do
   def handle_event("update", params, socket) do
     note = params["note"]
     socket = assign(socket, :note, note)
-    Notes.set_note(note)
+    GoveeSemaphore.set_note(note)
 
     {:noreply, socket}
   end
 
   def handle_event("note:submit", _params, socket) do
-    Notes.submit_note()
+    GoveeSemaphore.submit_note()
 
     {:noreply, socket}
   end
 
   def handle_event("note:clear", _params, socket) do
     socket = assign(socket, :note, nil)
-    Notes.clear_note()
+    GoveeSemaphore.clear_note()
 
     {:noreply, socket}
   end

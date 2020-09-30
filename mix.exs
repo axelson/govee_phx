@@ -34,7 +34,7 @@ defmodule GoveePhx.MixProject do
   defp deps do
     [
       dep(:govee, :github),
-      dep(:notes, :github),
+      dep(:govee_semaphore, :github),
       {:exsync, path: "~/dev/forks/exsync"},
 
       {:phoenix, "~> 1.5.4"},
@@ -65,6 +65,6 @@ defmodule GoveePhx.MixProject do
   defp dep(:govee, :github), do: {:govee, github: "axelson/govee"}
   defp dep(:govee, :path), do: {:govee, path: "~/dev/govee"}
 
-  defp dep(:notes, :github), do: {:notes, github: "axelson/notes"}
-  defp dep(:notes, :path), do: {:notes, path: "~/dev/notes"}
+  defp dep(:govee_semaphore, :github), do: {:govee_semaphore, github: "axelson/govee_semaphore"}
+  defp dep(:govee_semaphore, :path), do: {:govee_semaphore, path: "~/dev/govee_semaphore"}
 end
