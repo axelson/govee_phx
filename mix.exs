@@ -35,7 +35,7 @@ defmodule GoveePhx.MixProject do
     [
       dep(:govee, :github),
       dep(:govee_semaphore, :github),
-      {:exsync, path: "~/dev/forks/exsync"},
+      {:exsync, path: "~/dev/forks/exsync", only: :dev},
 
       dep(:blue_heron, :github),
       dep(:blue_heron_transport_usb, :github),
