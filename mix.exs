@@ -41,7 +41,7 @@ defmodule GoveePhx.MixProject do
       dep(:blue_heron_transport_usb, :github),
 
       {:phoenix, "~> 1.5.4"},
-      {:phoenix_live_view, "~> 0.13.0"},
+      {:phoenix_live_view, "~> 0.14.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
