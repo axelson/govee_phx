@@ -20,7 +20,7 @@ defmodule GoveePhx.MixProject do
   def application do
     [
       mod: {GoveePhxApplication, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:sasl, :logger, :runtime_tools]
     ]
   end
 
