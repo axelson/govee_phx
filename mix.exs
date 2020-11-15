@@ -74,7 +74,7 @@ defmodule GoveePhx.MixProject do
   defp dep(:blue_heron, :hex), do: {:blue_heron, ">= 0.0.0"}
 
   defp dep(:blue_heron, :github),
-    do: {:blue_heron, github: "smartrent/blue_heron", branch: "main", sparse: "blue_heron", override: true}
+    do: {:blue_heron, github: "blue-heron/blue_heron", branch: "main", override: true}
 
   defp dep(:blue_heron, :path),
     do: {:blue_heron, path: "~/dev/forks/blue_heron/blue_heron", override: true}
@@ -84,7 +84,7 @@ defmodule GoveePhx.MixProject do
   defp dep(:blue_heron_transport_usb, :github),
     do:
       {:blue_heron_transport_usb,
-       github: "smartrent/blue_heron", branch: "main", sparse: "blue_heron_transport_usb", only: :dev, override: true}
+       github: "blue-heron/blue_heron_transport_usb", branch: "main", only: :dev, override: true}
 
   defp dep(:blue_heron_transport_usb, :path),
     do: {:blue_heron_transport_usb, path: "~/dev/forks/blue_heron/blue_heron_transport_usb", only: :dev, override: true}

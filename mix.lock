@@ -1,6 +1,6 @@
 %{
-  "blue_heron": {:git, "https://github.com/smartrent/blue_heron.git", "739b07c1f027c9fa00995b943b39ef95b90f87c4", [branch: "main", sparse: "blue_heron"]},
-  "blue_heron_transport_usb": {:git, "https://github.com/smartrent/blue_heron.git", "739b07c1f027c9fa00995b943b39ef95b90f87c4", [branch: "main", sparse: "blue_heron_transport_usb"]},
+  "blue_heron": {:git, "https://github.com/blue-heron/blue_heron.git", "6b331ad8d1cd92c0eaaa0a1ca51e152a5302f23a", [branch: "main"]},
+  "blue_heron_transport_usb": {:git, "https://github.com/blue-heron/blue_heron_transport_usb.git", "73a00328c959422f4e2e7e4da84f8a9b8f5c4a8c", [branch: "main"]},
   "cowboy": {:hex, :cowboy, "2.8.0", "f3dc62e35797ecd9ac1b50db74611193c29815401e53bac9a5c0577bd7bc667d", [:rebar3], [{:cowlib, "~> 2.9.1", [hex: :cowlib, repo: "hexpm", optional: false]}, {:ranch, "~> 1.7.1", [hex: :ranch, repo: "hexpm", optional: false]}], "hexpm", "4643e4fba74ac96d4d152c75803de6fad0b3fa5df354c71afdd6cbeeb15fac8a"},
   "cowboy_telemetry": {:hex, :cowboy_telemetry, "0.3.1", "ebd1a1d7aff97f27c66654e78ece187abdc646992714164380d8a041eda16754", [:rebar3], [{:cowboy, "~> 2.7", [hex: :cowboy, repo: "hexpm", optional: false]}, {:telemetry, "~> 0.4", [hex: :telemetry, repo: "hexpm", optional: false]}], "hexpm", "3a6efd3366130eab84ca372cbd4a7d3c3a97bdfcfb4911233b035d117063f0af"},
   "cowlib": {:hex, :cowlib, "2.9.1", "61a6c7c50cf07fdd24b2f45b89500bb93b6686579b069a89f88cb211e1125c78", [:rebar3], [], "hexpm", "e4175dc240a70d996156160891e1c62238ede1729e45740bdd38064dad476170"},
