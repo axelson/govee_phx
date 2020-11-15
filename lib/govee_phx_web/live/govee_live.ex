@@ -112,7 +112,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   defp for_each_device(fun) when is_function(fun, 1) do
-    Enum.each(BLEConnection.connected_devices(Server), fun)
+    Enum.each(BLEConnection.connected_devices(BLEServer), fun)
   end
 
   defp render_note(:empty), do: nil
