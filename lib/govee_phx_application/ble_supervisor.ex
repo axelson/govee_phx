@@ -2,9 +2,10 @@ defmodule GoveePhxApplication.BLESupervisor do
   @moduledoc false
 
   use Parent.GenServer
+  require Logger
 
   def start_link(init_arg) do
-    Parent.GenServer.start_link(__MODULE__, init_arg, name: __MODULE__, max_restarts: :infinity)
+    Parent.GenServer.start_link(__MODULE__, init_arg, name: __MODULE__)
   end
 
   @impl GenServer
@@ -23,30 +24,26 @@ defmodule GoveePhxApplication.BLESupervisor do
   end
 
   @impl Parent.GenServer
-  def handle_stopped_children(stopped_children, state) do
-    Process.send_after(self(), {:restart, stopped_children}, :timer.seconds(5))
+  def handle_stopped_children(_stopped_children, state) do
+    schedule_restart()
 
     {:noreply, state}
   end
 
-  def handle_info({:restart, stopped_children}, state) do
-    # NOTE: This logic isn't really correct
-    # It only restarts the child process once
-    # https://github.com/sasa1977/parent/issues/13
-    try do
-      Parent.child_spec(child_spec(),
-        ephemeral?: true,
-        restart: :temporary,
-        max_seconds: 5
-      )
-      |> Parent.start_child()
-    rescue
-      error ->
-        IO.inspect(error, label: "error")
-    end
+  def handle_info(:restart_child, state) do
+    Parent.child_spec(child_spec(),
+      ephemeral?: true,
+      restart: :temporary,
+      max_seconds: 5
+    )
+    |> Parent.start_child()
+    |> case do
+      {:error, _} ->
+        schedule_restart()
 
-    # If this is used, then the child is restarted continuously
-    # Parent.return_children(stopped_children)
+      :ok ->
+        nil
+    end
 
     {:noreply, state}
   end
@@ -69,8 +66,10 @@ defmodule GoveePhxApplication.BLESupervisor do
       transport_config: transport_config
     ]
 
-    Logger.info("GoveePhx starting Govee BLEConnection with #{inspect opts}")
+    Logger.info("GoveePhx starting Govee BLEConnection with #{inspect(opts)}")
 
     {Govee.BLEConnection, opts}
   end
+
+  defp schedule_restart, do: Process.send_after(self(), :restart_child, :timer.seconds(300))
 end
