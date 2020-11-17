@@ -95,7 +95,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   @impl Phoenix.LiveView
-  def handle_info({:notes, :submit_note, note}, socket) do
+  def handle_info({:govee_semaphore, :submit_note, note}, socket) do
     socket = assign(socket, note: note)
     {:noreply, socket}
   end
