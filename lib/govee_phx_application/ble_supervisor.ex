@@ -10,13 +10,7 @@ defmodule GoveePhxApplication.BLESupervisor do
 
   @impl GenServer
   def init(_init_arg) do
-    children = [
-      Parent.child_spec(child_spec(),
-        ephemeral?: true,
-        restart: :temporary,
-        max_seconds: 5
-      )
-    ]
+    children = children()
 
     Parent.start_all_children!(children)
 
@@ -48,6 +42,20 @@ defmodule GoveePhxApplication.BLESupervisor do
     {:noreply, state}
   end
 
+  def children do
+    if enabled?() do
+      [
+        Parent.child_spec(child_spec(),
+          ephemeral?: true,
+          restart: :temporary,
+          max_seconds: 5
+        )
+      ]
+    else
+      []
+    end
+  end
+
   def child_spec do
     alias BlueHeron.HCI.Command.ControllerAndBaseband.WriteLocalName
 
@@ -72,4 +80,6 @@ defmodule GoveePhxApplication.BLESupervisor do
   end
 
   defp schedule_restart, do: Process.send_after(self(), :restart_child, :timer.seconds(300))
+
+  defp enabled?, do: Application.fetch_env!(:govee_phx, :transport_type) != :disabled
 end
