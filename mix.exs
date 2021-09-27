@@ -33,20 +33,20 @@ defmodule GoveePhx.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      dep(:govee, :github),
+      dep(:govee, :path),
       dep(:govee_semaphore, :github),
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
 
       dep(:blue_heron, :github),
       dep(:blue_heron_transport_usb, :github),
 
-      {:phoenix, "~> 1.5.4"},
-      {:phoenix_live_view, "~> 0.15.0"},
+      {:phoenix, "~> 1.6.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
+      {:phoenix_live_view, "~> 0.16.4"},
+      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
@@ -67,7 +67,7 @@ defmodule GoveePhx.MixProject do
   end
 
   defp dep(:govee, :github), do: {:govee, github: "axelson/govee"}
-  defp dep(:govee, :path), do: {:govee, path: "~/dev/govee"}
+  defp dep(:govee, :path), do: {:govee, path: "~/dev/govee", override: true}
 
   defp dep(:govee_semaphore, :github), do: {:govee_semaphore, github: "axelson/govee_semaphore"}
   defp dep(:govee_semaphore, :path), do: {:govee_semaphore, path: "~/dev/govee_semaphore"}
