@@ -5,9 +5,6 @@ defmodule GoveePhxWeb.GoveeLive do
   alias Govee.CommonCommands
   alias Govee.BLEConnection
 
-  @meeting_in_progress_color 0xFF0000
-  @meeting_finished_color 0x0D9106
-
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     if connected?(socket) do

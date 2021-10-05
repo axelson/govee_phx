@@ -30,9 +30,9 @@ defmodule GoveePhxWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug ExSync.ReloaderPlug
-    plug Phoenix.LiveReloader
-    plug Phoenix.CodeReloader
+    # plug ExSync.ReloaderPlug
+    # plug Phoenix.LiveReloader
+    # plug Phoenix.CodeReloader
   end
 
   plug Plug.RequestId
