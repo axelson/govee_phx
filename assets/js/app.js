@@ -19,8 +19,6 @@ import {LiveSocket} from "phoenix_live_view"
 import throttle from 'lodash.throttle'
 import "./jscolor.js"
 
-console.log('govee_phx app.js running')
-
 let throttleMs = 100;
 let Hooks = {}
 
