@@ -4,6 +4,7 @@ defmodule GoveePhxApplication do
   use Application
   require Logger
 
+  @impl Application
   def start(_type, _args) do
     Logger.info("GoveePhx starting")
     children = [
@@ -19,6 +20,7 @@ defmodule GoveePhxApplication do
     Supervisor.start_link(children, opts)
   end
 
+  @impl Application
   def config_change(changed, _new, removed) do
     GoveePhxWeb.Endpoint.config_change(changed, removed)
     :ok
