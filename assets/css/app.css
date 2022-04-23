@@ -1,8 +1,8 @@
-@import "../node_modules/nprogress/nprogress.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* This file is for your main application CSS */
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="range"]::-webkit-slider-thumb {
