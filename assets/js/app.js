@@ -30,29 +30,33 @@ let throttleMs = 100;
 let Hooks = {}
 
 Hooks.ColorSelector = {
+  target() { return this.el.getAttribute("phx-target") },
   mounted() {
+    jscolor.install();
     this.el.addEventListener("build", throttle(e => {
       const ev = e.detail
       const hex = ev.toHEXString()
-      this.pushEvent("color", {hex: hex})
+      this.pushEventTo(this.target(), "color", {hex: hex, connName: this.el.dataset.connName})
     }, throttleMs))
   }
 }
 
 Hooks.BrightnessSlider = {
+  target() { return this.el.getAttribute("phx-target") },
   mounted() {
     this.el.addEventListener("input", throttle(e => {
       const value = parseInt(e.target.value)
-      this.pushEvent("brightness", {value: value})
+      this.pushEventTo(this.target(), "brightness", {value: value, connName: this.el.dataset.connName})
     }, throttleMs))
   }
 }
 
 Hooks.WhiteSlider = {
+  target() { return this.el.getAttribute("phx-target") },
   mounted() {
     this.el.addEventListener("input", throttle(e => {
       const value = parseInt(e.target.value)
-      this.pushEvent("white-slider", {value: value})
+      this.pushEventTo(this.target(), "white-slider", {value: value, connName: this.el.dataset.connName})
     }, throttleMs))
   }
 }

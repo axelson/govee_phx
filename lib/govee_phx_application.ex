@@ -7,6 +7,7 @@ defmodule GoveePhxApplication do
   @impl Application
   def start(_type, _args) do
     Logger.info("GoveePhx starting")
+
     children = [
       GoveePhxWeb.Telemetry,
       {Phoenix.PubSub, name: GoveePhx.PubSub},

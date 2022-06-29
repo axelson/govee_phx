@@ -1,3 +1,24 @@
+Hook up GoveeScenic
+I need a behavior
+I need a way to refer to a connected device and send it generic commands
+
+
+TODO:
+- [x] See where a driver is being started
+  - And then pass the default scene another way so we can listen to the correct topic for each scenic conn
+- [x] Get multiple govee scenic windows to work at the same time
+- [ ] Provide a cleaner way to get a named govee scenic conn
+  - Probably involves passing in an identifier in instead of loading from config at init time
+- [ ] Track and display connection status per device
+  - How should this be communicated? Phoenix PubSub?
+- [ ] Should govee scenic pubsub be configurable? Right now it's hard-coded
+- [x] Remove raw GenServer.call's
+- [x] Sync brightness?
+- [ ] Need to handle either adding dynamic or static devices (i.e. for BLE devices they will probably be mostly configured)
+- [ ] Test with an actual device
+
+
+
 # GoveePhx
 
 A simple Phoenix LiveView interface to a Govee H6001 LED bulb. Built with

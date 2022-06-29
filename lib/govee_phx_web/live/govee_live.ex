@@ -2,86 +2,46 @@ defmodule GoveePhxWeb.GoveeLive do
   use GoveePhxWeb, :live_view
   require Logger
 
-  alias Govee.CommonCommands
-  alias Govee.BLEConnection
-
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     if connected?(socket) do
       :ok = GoveeSemaphore.subscribe()
     end
 
-    socket = assign(socket, note: GoveeSemaphore.get_note())
+    conns = GoveePhxApplication.BLESupervisor.get_conns()
+
+    socket = assign(socket, conns: conns)
     {:ok, socket}
   end
 
   @impl Phoenix.LiveView
-  def handle_event("off", _, socket) do
-    CommonCommands.turn_off()
-    |> run_command()
+  def handle_event("add_device", _, socket) do
+    device =
+      Govee.Device.new!(
+        type: :h6001,
+        addr: Govee.Device.random_addr()
+      )
+
+    # TODO: no raw genserver call
+    {:ok, conn} = GoveePhxApplication.BLESupervisor.add_device(device)
+    socket = assign(socket, conns: [conn | socket.assigns.conns])
 
     {:noreply, socket}
   end
 
-  def handle_event("on", _, socket) do
-    CommonCommands.turn_on()
-    |> run_command()
+  def handle_event("remove_device_" <> conn_name, _, socket) do
+    {to_remove, conns} =
+      Enum.split_with(socket.assigns.conns, fn conn -> to_string(conn.name) == conn_name end)
 
-    {:noreply, socket}
-  end
+    socket =
+      case to_remove do
+        [conn] ->
+          :ok = GoveePhxApplication.BLESupervisor.remove_device(conn)
+          assign(socket, conns: conns)
 
-  def handle_event("color", %{"hex" => "#" <> hex_str}, socket) do
-    {hex, ""} = Integer.parse(hex_str, 16)
-
-    CommonCommands.set_color(hex)
-    |> run_command()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("brightness", %{"value" => value}, socket) do
-    CommonCommands.set_brightness(value)
-    |> run_command()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("white-slider", %{"value" => value}, socket) do
-    value = value / 100
-    CommonCommands.set_white(value) |> run_command()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("meeting:start", _, socket) do
-    GoveeSemaphore.start_meeting()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("meeting:finish", _, socket) do
-    GoveeSemaphore.finish_meeting()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("update", params, socket) do
-    note = params["note"]
-    socket = assign(socket, :note, note)
-    GoveeSemaphore.set_note(note)
-
-    {:noreply, socket}
-  end
-
-  def handle_event("note:submit", _params, socket) do
-    GoveeSemaphore.submit_note()
-
-    {:noreply, socket}
-  end
-
-  def handle_event("note:clear", _params, socket) do
-    socket = assign(socket, :note, nil)
-    GoveeSemaphore.clear_note()
+        [] ->
+          socket
+      end
 
     {:noreply, socket}
   end
@@ -98,20 +58,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_info(event, socket) do
-    Logger.warn("Unhandled event: #{inspect event}")
+    Logger.warn("Unhandled event: #{inspect(event)}")
     {:noreply, socket}
   end
-
-  def run_command(command) do
-    for_each_device(fn device ->
-      CommonCommands.send_command(command, device.att_client)
-    end)
-  end
-
-  defp for_each_device(fun) when is_function(fun, 1) do
-    Enum.each(BLEConnection.connected_devices(BLEServer), fun)
-  end
-
-  defp render_note(:empty), do: nil
-  defp render_note(note), do: note
 end

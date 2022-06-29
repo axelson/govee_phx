@@ -33,10 +33,10 @@ defmodule GoveePhx.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      dep(:govee, :github),
-      dep(:govee_semaphore, :github),
+      dep(:govee, :path),
+      dep(:govee_semaphore, :path),
+      {:govee_scenic, path: "~/dev/govee_scenic", only: :dev},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
-
       dep(:blue_heron, :github),
       dep(:blue_heron_transport_usb, :github),
       {:parent, "~> 0.11"},
@@ -55,7 +55,7 @@ defmodule GoveePhx.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
+      {:plug_cowboy, "~> 2.5"}
     ]
   end
 
@@ -81,6 +81,10 @@ defmodule GoveePhx.MixProject do
   defp dep(:govee_semaphore, :github), do: {:govee_semaphore, github: "axelson/govee_semaphore"}
   defp dep(:govee_semaphore, :path), do: {:govee_semaphore, path: "~/dev/govee_semaphore"}
 
+  defp dep(:govee_scenic, :github), do: {:govee_scenic, github: "axelson/govee_scenic"}
+
+  # defp dep(:govee_scenic, :path, opts \\ []), do: {:govee_scenic, Keyword.merge(path: "~/dev/govee_scenic", opts)}
+
   defp dep(:blue_heron, :hex), do: {:blue_heron, ">= 0.0.0"}
 
   defp dep(:blue_heron, :github),
@@ -89,7 +93,8 @@ defmodule GoveePhx.MixProject do
   defp dep(:blue_heron, :path),
     do: {:blue_heron, path: "~/dev/forks/blue_heron/blue_heron", override: true}
 
-  defp dep(:blue_heron_transport_usb, :hex), do: {:blue_heron_transport_usb, ">= 0.0.0", only: :dev}
+  defp dep(:blue_heron_transport_usb, :hex),
+    do: {:blue_heron_transport_usb, ">= 0.0.0", only: :dev}
 
   defp dep(:blue_heron_transport_usb, :github),
     do:
@@ -97,5 +102,7 @@ defmodule GoveePhx.MixProject do
        github: "blue-heron/blue_heron_transport_usb", branch: "main", only: :dev, override: true}
 
   defp dep(:blue_heron_transport_usb, :path),
-    do: {:blue_heron_transport_usb, path: "~/dev/forks/blue_heron/blue_heron_transport_usb", only: :dev, override: true}
+    do:
+      {:blue_heron_transport_usb,
+       path: "~/dev/forks/blue_heron/blue_heron_transport_usb", only: :dev, override: true}
 end
