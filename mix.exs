@@ -33,8 +33,8 @@ defmodule GoveePhx.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      dep(:govee, :path),
-      dep(:govee_semaphore, :path),
+      dep(:govee, :github),
+      dep(:govee_semaphore, :github),
       {:govee_scenic, path: "~/dev/govee_scenic", only: :dev},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
       dep(:blue_heron, :github),
