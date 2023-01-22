@@ -4,7 +4,7 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
   @impl Phoenix.LiveComponent
   def render(assigns) do
     ~H"""
-    <div>
+    <div id={"comp-id-#{id(@conn)}"}>
       <div class="hero"><%= @conn.name %></div>
 
       <div class="bg-slate-200 rounded-lg p-2">
@@ -27,7 +27,7 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
 
         <div class="p-1">
           <button
-            id={"color-selector-#{@conn.name}"}
+            id={"color-selector-#{id(@conn)}"}
             data-jscolor="{
         onChange: 'update(this, \'#pr1\')',
         onInput: 'update(this)',
@@ -45,7 +45,7 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
           Brightness:
           <input
             class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-128"
-            id={"brightness-slider-#{@conn.name}"}
+            id={"brightness-slider-#{id(@conn)}"}
             phx-hook="BrightnessSlider"
             phx-target={@myself}
             type="range"
@@ -60,7 +60,7 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
           White light:
           <input
             class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-128"
-            id={"white-slider-#{@conn.name}"}
+            id={"white-slider-#{id(@conn)}"}
             phx-hook="WhiteSlider"
             type="range"
             min="-100"
@@ -160,6 +160,11 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
   end
 
   def execute_command(command, conn) do
-    GoveeScenic.execute_command(conn, command)
+    GoveePhxApplication.BLESupervisor.execute_command(command, conn)
+  end
+
+  defp id(conn) do
+    String.replace(conn.name, ":", "_")
+    # String.replace(conn.name, "_", ":")
   end
 end

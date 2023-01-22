@@ -1,9 +1,10 @@
-Hook up GoveeScenic
-I need a behavior
-I need a way to refer to a connected device and send it generic commands
-
-
 TODO:
+- [ ] create interface over scenic conn and govee device
+  - Currently I'm working around this by relying on the name
+  - Maybe Govee get_conns should return a Conn (translated from a device?)
+  - i.e. Conn can be the translation layer so that govee_phx doesn't need to know about a raw device
+- [ ] Clean up "GoveePhx.ScenicThing"
+- [ ] General code cleanup
 - [x] See where a driver is being started
   - And then pass the default scene another way so we can listen to the correct topic for each scenic conn
 - [x] Get multiple govee scenic windows to work at the same time
@@ -15,7 +16,7 @@ TODO:
 - [x] Remove raw GenServer.call's
 - [x] Sync brightness?
 - [ ] Need to handle either adding dynamic or static devices (i.e. for BLE devices they will probably be mostly configured)
-- [ ] Test with an actual device
+- [x] Test with an actual device
 
 
 

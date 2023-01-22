@@ -47,7 +47,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_event(event, params, socket) do
-    Logger.warn("Unhandled event \"#{event}\" with params: #{inspect(params)}")
+    Logger.warn("#{__MODULE__} Unhandled event \"#{event}\" with params: #{inspect(params)}")
     {:noreply, socket}
   end
 
@@ -58,7 +58,11 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_info(event, socket) do
-    Logger.warn("Unhandled event: #{inspect(event)}")
+    Logger.warn("#{__MODULE__} Unhandled message: #{inspect(event)}")
     {:noreply, socket}
+  end
+
+  def execute_command(command, conn) do
+    GoveePhxApplication.BLESupervisor.execute_command(command, conn)
   end
 end

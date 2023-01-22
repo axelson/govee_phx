@@ -33,9 +33,9 @@ defmodule GoveePhx.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      dep(:govee, :github),
-      dep(:govee_semaphore, :github),
-      {:govee_scenic, path: "~/dev/govee_scenic", only: :dev},
+      dep(:govee, :path),
+      dep(:govee_semaphore, :path),
+      {:govee_scenic, path: "~/dev/govee_scenic"},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
       dep(:blue_heron, :github),
       dep(:blue_heron_transport_usb, :github),
@@ -46,7 +46,7 @@ defmodule GoveePhx.MixProject do
       {:phoenix, "~> 1.6.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.17.5"},
+      {:phoenix_live_view, "~> 0.18.7"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
