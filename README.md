@@ -41,3 +41,9 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Updating
+
+Run `mix assets.deploy` before pushing to git
+
+This is important because this is how the top-level application pulls the latest assets (especially js)
