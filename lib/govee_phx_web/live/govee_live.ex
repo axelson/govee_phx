@@ -65,4 +65,9 @@ defmodule GoveePhxWeb.GoveeLive do
   def execute_command(command, conn) do
     GoveePhxApplication.BLESupervisor.execute_command(command, conn)
   end
+
+  # Might not be necessary but it feels odd to have `:` in an HTML ID
+  defp id(conn) do
+    String.replace(conn.name, ":", "_")
+  end
 end

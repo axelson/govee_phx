@@ -14,7 +14,7 @@
   <div>name: <%= conn.name %></div>
   <.live_component
     module={GoveePhxWeb.GoveeControlsComponent}
-    id={"hero-#{conn.name}"}
+    id={"comp-id-#{id(conn)}"}
     conn={conn}
   />
 <% end %>
