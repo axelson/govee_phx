@@ -25,7 +25,6 @@ defmodule GoveePhx.ScenicThing do
         raise "Starting up with configured devices is not fully implemented"
       end)
 
-
     {:ok, %{conns: conns}}
   end
 
