@@ -37,8 +37,8 @@ defmodule GoveePhx.MixProject do
       # {:govee_scenic, path: "~/dev/govee_scenic"},
       {:govee_scenic, github: "axelson/govee_scenic"},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
-      dep(:blue_heron, :github),
-      dep(:blue_heron_transport_usb, :github),
+      dep(:blue_heron, :hex),
+      dep(:blue_heron_transport_usb, :hex),
       {:parent, "~> 0.11"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:data_tracer, path: "~/dev/data_tracer", override: true},
@@ -87,7 +87,7 @@ defmodule GoveePhx.MixProject do
 
   # defp dep(:govee_scenic, :path, opts \\ []), do: {:govee_scenic, Keyword.merge(path: "~/dev/govee_scenic", opts)}
 
-  defp dep(:blue_heron, :hex), do: {:blue_heron, ">= 0.0.0"}
+  defp dep(:blue_heron, :hex), do: {:blue_heron, ">= 0.0.0", override: true}
 
   defp dep(:blue_heron, :github),
     do: {:blue_heron, github: "blue-heron/blue_heron", branch: "main", override: true}
