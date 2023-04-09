@@ -29,6 +29,18 @@ defmodule GoveePhxWeb.GoveeLive do
     {:noreply, socket}
   end
 
+  def handle_event("party_mode", _, socket) do
+    GoveePhx.party_mode()
+
+    {:noreply, socket}
+  end
+
+  def handle_event("turn_all_off", _, socket) do
+    GoveePhx.all_off()
+
+    {:noreply, socket}
+  end
+
   def handle_event("remove_device_" <> conn_name, _, socket) do
     {to_remove, conns} =
       Enum.split_with(socket.assigns.conns, fn conn -> to_string(conn.name) == conn_name end)
