@@ -22,7 +22,7 @@ defmodule GoveePhxWeb do
       use Phoenix.Controller, namespace: GoveePhxWeb
 
       import Plug.Conn
-      import GoveePhxWeb.Gettext
+      use Gettext, backend: GoveePhxWeb.Gettext
       alias GoveePhxWeb.Router.Helpers, as: Routes
     end
   end
@@ -35,7 +35,7 @@ defmodule GoveePhxWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+        only: [view_module: 1, view_template: 1]
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
@@ -80,7 +80,7 @@ defmodule GoveePhxWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import GoveePhxWeb.Gettext
+      use Gettext, backend: GoveePhxWeb.Gettext
     end
   end
 
@@ -98,7 +98,7 @@ defmodule GoveePhxWeb do
       import Phoenix.View
 
       import GoveePhxWeb.ErrorHelpers
-      import GoveePhxWeb.Gettext
+      use Gettext, backend: GoveePhxWeb.Gettext
       alias GoveePhxWeb.Router.Helpers, as: Routes
     end
   end

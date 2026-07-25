@@ -35,9 +35,10 @@ defmodule GoveePhxApplication.BLESupervisor do
   def init(_init_arg) do
     children = children()
 
-    [child_pid] = Parent.start_all_children!(children)
-
-    {:ok, %State{child_pid: child_pid}}
+    case Parent.start_all_children!(children) do
+      [child_pid] -> {:ok, %State{child_pid: child_pid}}
+      [] -> {:ok, %State{child_pid: nil}}
+    end
   end
 
   @impl Parent.GenServer
@@ -71,12 +72,13 @@ defmodule GoveePhxApplication.BLESupervisor do
   end
 
   @impl GenServer
+  def handle_call(:get_conns, _from, %State{child_pid: nil} = state) do
+    {:reply, [], state}
+  end
+
   def handle_call(:get_conns, _from, state) do
-    # TODO: This is breaking encapsulation a bit
-    # FIXME: I think the Govee.BLECOnnectionManager is being started twice!
     Logger.info("govee_phx get_conns from parent to #{inspect(state.child_pid)}")
     conns = GenServer.call(state.child_pid, :get_conns)
-    IO.inspect(conns, label: "got conns (ble_supervisor.ex:79)")
 
     {:reply, conns, state}
   end

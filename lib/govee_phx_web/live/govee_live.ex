@@ -59,7 +59,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_event(event, params, socket) do
-    Logger.warn("#{__MODULE__} Unhandled event \"#{event}\" with params: #{inspect(params)}")
+    Logger.warning("#{__MODULE__} Unhandled event \"#{event}\" with params: #{inspect(params)}")
     {:noreply, socket}
   end
 
@@ -70,7 +70,7 @@ defmodule GoveePhxWeb.GoveeLive do
   end
 
   def handle_info(event, socket) do
-    Logger.warn("#{__MODULE__} Unhandled message: #{inspect(event)}")
+    Logger.warning("#{__MODULE__} Unhandled message: #{inspect(event)}")
     {:noreply, socket}
   end
 

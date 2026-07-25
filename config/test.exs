@@ -10,8 +10,11 @@ config :govee_phx, GoveePhxWeb.Endpoint,
 # In test we don't send emails.
 config :govee_phx, GoveePhx.Mailer, adapter: Swoosh.Adapters.Test
 
+# Disable BLE in test
+config :govee_phx, transport_type: :disabled
+
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime

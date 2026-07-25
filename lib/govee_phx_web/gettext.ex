@@ -20,5 +20,5 @@ defmodule GoveePhxWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :govee_phx
+  use Gettext.Backend, otp_app: :govee_phx
 end

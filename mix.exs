@@ -5,7 +5,7 @@ defmodule GoveePhx.MixProject do
     [
       app: :govee_phx,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -38,20 +38,22 @@ defmodule GoveePhx.MixProject do
       {:govee_scenic, github: "axelson/govee_scenic"},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
       dep(:blue_heron, :hex),
-      dep(:blue_heron_transport_usb, :hex),
+      # dep(:blue_heron_transport_usb, :hex),
       {:parent, "~> 0.11"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:data_tracer, path: "~/dev/data_tracer", override: true},
 
       # Phoenix deps
-      {:phoenix, "~> 1.7.0"},
+      {:phoenix, "~> 1.7.0 or ~> 1.8"},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_html_helpers, "~> 1.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20"},
-      {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.7"},
+      {:phoenix_live_view, "~> 1.0"},
+      {:floki, "~> 0.36", only: :test},
+      {:lazy_html, ">= 0.1.0", only: :test},
+      {:elixir_make, "~> 0.9", override: true},
+      {:phoenix_live_dashboard, "~> 0.8"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},
@@ -70,10 +72,8 @@ defmodule GoveePhx.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      setup: ["deps.get"],
+      test: ["test"],
       "assets.deploy": ["esbuild default --minify", "phx.digest"]
     ]
   end
