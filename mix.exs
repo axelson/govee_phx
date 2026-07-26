@@ -78,7 +78,7 @@ defmodule GoveePhx.MixProject do
     ]
   end
 
-  defp dep(:govee, :github), do: {:govee, github: "axelson/govee", branch: "new-update"}
+  defp dep(:govee, :github), do: {:govee, github: "axelson/govee"}
   # defp dep(:govee, :path), do: {:govee, path: "~/dev/govee", override: true}
 
   defp dep(:govee_semaphore, :github), do: {:govee_semaphore, github: "axelson/govee_semaphore"}
