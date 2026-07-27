@@ -49,7 +49,7 @@ defmodule GoveePhxApplication.BLESupervisor do
   end
 
   # This is a little funky, but this starts a stopped child
-  def handle_info(:restart_child, state) do
+  def handle_info(:restart_child, %State{} = state) do
     state =
       Parent.child_spec(child_spec(),
         ephemeral?: true,
@@ -65,7 +65,6 @@ defmodule GoveePhxApplication.BLESupervisor do
         {:ok, child_pid} ->
           Logger.info("restarted child_pid: #{inspect(child_pid, pretty: true)}")
           %State{state | child_pid: child_pid}
-          nil
       end
 
     {:noreply, state}
@@ -83,7 +82,7 @@ defmodule GoveePhxApplication.BLESupervisor do
     {:reply, conns, state}
   end
 
-  def handle_call({:add_device, device}, _from, state) do
+  def handle_call({:add_device, device}, _from, %State{} = state) do
     state = %State{state | configured_devices: [device | state.configured_devices]}
 
     result = GenServer.call(state.child_pid, {:add_device, device})
