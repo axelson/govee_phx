@@ -16,7 +16,7 @@
   "fine": {:hex, :fine, "0.1.6", "4bf7151493443c454aac9f2fa2f34f5fefd0346a83fb5586a016c4a135c63247", [:mix], [], "hexpm", "5638eb4495488e885ebec167fa57973e5c35e1a50c344eb7666c90ec1c4e3b12"},
   "floki": {:hex, :floki, "0.38.4", "10f98971e892aed2c2f1b3a0f928e488e3797e1c6dd3dfd98db40b14e9a78bcf", [:mix], [], "hexpm", "bdb34645eee8e79845c7edaca2d4099a52804ee4d4a3ecc683a69451f0244973"},
   "font_metrics": {:hex, :font_metrics, "0.5.2", "4a3f0223308f999a9773adc026e1f81fb094973160b31eabb4d0850be3781088", [:mix], [{:nimble_options, "~> 0.3 or ~> 1.0", [hex: :nimble_options, repo: "hexpm", optional: false]}], "hexpm", "8a3b10555b35988366f98adc62de0151f4869e8179a59cc84aa5a68701615ffd"},
-  "gettext": {:hex, :gettext, "0.26.2", "5978aa7b21fada6deabf1f6341ddba50bc69c999e812211903b169799208f2a8", [:mix], [{:expo, "~> 0.5.1 or ~> 1.0", [hex: :expo, repo: "hexpm", optional: false]}], "hexpm", "aa978504bcf76511efdc22d580ba08e2279caab1066b76bb9aa81c4a1e0a32a5"},
+  "gettext": {:hex, :gettext, "1.0.2", "5457e1fd3f4abe47b0e13ff85086aabae760497a3497909b8473e0acee57673b", [:mix], [{:expo, "~> 0.5.1 or ~> 1.0", [hex: :expo, repo: "hexpm", optional: false]}], "hexpm", "eab805501886802071ad290714515c8c4a17196ea76e5afc9d06ca85fb1bfeb3"},
   "govee": {:git, "https://github.com/axelson/govee.git", "0cd366520bfc749dfdc51438187072a23a8179b0", []},
   "govee_scenic": {:git, "https://github.com/axelson/govee_scenic.git", "7e2824a72f05b0cd284666581174c41823790a0d", []},
   "govee_semaphore": {:git, "https://github.com/axelson/govee_semaphore.git", "23bf72c42c6c2c7a5465739f34226efd92e62f4f", []},
