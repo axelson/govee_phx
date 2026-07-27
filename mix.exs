@@ -74,7 +74,17 @@ defmodule GoveePhx.MixProject do
     [
       setup: ["deps.get"],
       test: ["test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      precommit: [
+        "compile --all-warnings --warnings-as-errors",
+        "deps.unlock --unused",
+        "format --check-formatted"
+      ],
+      check: [
+        "compile --all-warnings --warnings-as-errors",
+        "deps.unlock --unused",
+        "format --check-formatted"
+      ]
     ]
   end
 

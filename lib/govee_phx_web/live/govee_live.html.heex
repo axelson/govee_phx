@@ -1,4 +1,4 @@
-<h1>Lights: <%= length(@conns) %></h1>
+<h1>Lights: {length(@conns)}</h1>
 
 <h1>Devices</h1>
 <div class="p-1">
@@ -11,7 +11,7 @@
 </div>
 
 <%= for conn <- @conns do %>
-  <div>name: <%= conn.name %></div>
+  <div>name: {conn.name}</div>
   <.live_component
     module={GoveePhxWeb.GoveeControlsComponent}
     id={"comp-id-#{id(conn)}"}

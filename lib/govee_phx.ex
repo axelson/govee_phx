@@ -10,7 +10,6 @@ defmodule GoveePhx do
   def party_mode do
     GoveePhxApplication.BLESupervisor.get_conns()
     |> Enum.each(fn conn ->
-
       command = Govee.Command.set_color(0x8E59FF)
       GoveePhxApplication.BLESupervisor.execute_command(command, conn)
 

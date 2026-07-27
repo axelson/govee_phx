@@ -5,7 +5,7 @@ defmodule GoveePhxWeb.GoveeControlsComponent do
   def render(assigns) do
     ~H"""
     <div id={@id}>
-      <div class="hero"><%= @conn.name %></div>
+      <div class="hero">{@conn.name}</div>
 
       <div class="bg-slate-200 rounded-lg p-2">
         <div class="p-1">
