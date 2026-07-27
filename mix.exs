@@ -56,7 +56,7 @@ defmodule GoveePhx.MixProject do
       {:phoenix_live_dashboard, "~> 0.8"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_metrics, "~> 0.6 or ~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
