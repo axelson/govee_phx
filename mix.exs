@@ -40,7 +40,7 @@ defmodule GoveePhx.MixProject do
       dep(:blue_heron, :hex),
       # dep(:blue_heron_transport_usb, :hex),
       {:parent, "~> 0.11"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.5", runtime: Mix.env() == :dev},
       {:data_tracer, path: "~/dev/data_tracer", override: true},
 
       # Phoenix deps
